@@ -12,6 +12,8 @@ import SendScreen from './components/screens/SendScreen';
 import ReceiveScreen from './components/screens/ReceiveScreen';
 import SwapScreen from './components/screens/SwapScreen';
 import MarketScreen from './components/screens/MarketScreen';
+import Navbar from "./components/Navbar";
+import Glowinglogo from "./components/Glowinglogo";
 import { FeedScreen, CommunityScreen, P2PScreen, AutopilotScreen } from './components/screens/OtherScreens';
 
 export default function App() {
