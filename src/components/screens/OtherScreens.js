@@ -140,7 +140,7 @@ export function P2PScreen() {
                 letterSpacing:1,transition:'all 0.3s',
                 background:t.type==='buy'?'rgba(0,255,136,0.15)':'rgba(255,68,102,0.15)',
                 color:t.type==='buy'?'#00ff88':'#ff4466',
-                border:`1px solid ${t.type==='buy'?'rgba(0,255,136,0.3)':'rgba(255,68,102,0.3)'}`,
+                borderStyle:'solid',borderWidth:1,borderColor:t.type==='buy'?'rgba(0,255,136,0.3)':'rgba(255,68,102,0.3)',
               }}
               onMouseEnter={e=>e.currentTarget.style.transform='scale(1.05)'}
               onMouseLeave={e=>e.currentTarget.style.transform=''}
@@ -191,7 +191,7 @@ export function AutopilotScreen() {
                     <div style={{fontSize:12,fontWeight:600}}>{coin.name}</div>
                     <div style={{fontSize:10,color:'rgba(255,255,255,0.4)'}}>Confidence: {p.conf}%</div>
                   </div>
-                  <div style={{width:`${p.conf}%`,height:3,background:'rgba(255,255,255,0.1)',borderRadius:2,position:'relative',width:60}}>
+                  <div style={{width:`${p.conf}%`,height:3,background:'rgba(255,255,255,0.1)',borderRadius:2,position:'relative',maxWidth:60}}>
                     <div style={{width:`${p.conf}%`,height:'100%',background:p.signal==='buy'?'#00ff88':p.signal==='sell'?'#ff4466':'#ffd700',borderRadius:2}}/>
                   </div>
                   <div className={`ai-signal ${p.signal}`}>{p.signal.toUpperCase()}</div>

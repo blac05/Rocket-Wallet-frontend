@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import useWalletStore from '../../store/useWalletStore';
+import logo from '../../assets/logo.png';
 
 export default function LaunchScreen() {
   const setScreen = useWalletStore((s) => s.setScreen);
@@ -8,40 +9,75 @@ export default function LaunchScreen() {
 
   const handleLaunch = (mode) => {
     setLaunching(true);
-    // spawn particles
-    for (let i = 0; i < 22; i++) {
+    for (let i = 0; i < 26; i++) {
       const p = document.createElement('div');
-      const sz = Math.random() * 7 + 2;
+      const sz = Math.random() * 8 + 2;
       const hue = Math.random() * 60 + 180;
       p.style.cssText = `position:fixed;border-radius:50%;pointer-events:none;z-index:99;
         width:${sz}px;height:${sz}px;background:hsl(${hue},100%,70%);
-        left:${40 + Math.random() * 20}%;bottom:30%;
+        left:${38 + Math.random() * 24}%;bottom:32%;
         animation:floatUp ${Math.random() * 2 + 0.8}s linear ${Math.random() * 0.4}s forwards;`;
       document.body.appendChild(p);
-      setTimeout(() => p.remove(), 3000);
+      setTimeout(() => p.remove(), 3200);
     }
-    setTimeout(() => setScreen(mode === 'register' ? 'register' : 'login'), 2200);
+    setTimeout(() => setScreen(mode === 'register' ? 'register' : 'login'), 2300);
   };
 
   return (
     <div style={{
-      position: 'absolute', inset: 0, zIndex: 10,
-      background: 'radial-gradient(ellipse at 50% 110%, #1a0a3e 0%, #030712 60%)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      position:'absolute', inset:0, zIndex:10,
+      background:'radial-gradient(ellipse at 50% 110%, #1a0a3e 0%, #030712 60%)',
+      display:'flex', alignItems:'center', justifyContent:'center',
+      overflow:'hidden',
     }}>
-      <div style={{ textAlign: 'center', padding: 24, maxWidth: 340, width: '100%' }}>
+      {/* Orbit rings */}
+      {[110, 175, 245].map((r, i) => (
+        <div key={r} style={{
+          position:'absolute', top:'38%', left:'50%',
+          width: r * 2, height: r * 2, borderRadius:'50%',
+          border:`1px solid rgba(0,212,255,${0.07 - i * 0.018})`,
+          transform:'translate(-50%,-50%)',
+          pointerEvents:'none',
+        }}/>
+      ))}
 
-        {/* Rocket */}
+      <div style={{ textAlign:'center', padding:24, maxWidth:360, width:'100%', position:'relative', zIndex:2 }}>
+
+        {/* Logo image with glow */}
+        <div style={{ position:'relative', width:100, height:100, margin:'0 auto 4px' }}>
+          {/* Glow blob behind logo */}
+          <div style={{
+            position:'absolute', inset:-18,
+            borderRadius:'50%',
+            background:'radial-gradient(circle, rgba(0,212,255,0.35) 0%, transparent 70%)',
+            animation:'aiPulse 2.5s ease-in-out infinite',
+            pointerEvents:'none',
+          }}/>
+          <img
+            src={logo}
+            alt="Rocket Wallet"
+            style={{
+              width:100, height:100, borderRadius:'50%',
+              objectFit:'contain',
+              filter:'drop-shadow(0 0 22px rgba(0,212,255,0.9)) drop-shadow(0 0 48px rgba(155,89,255,0.5))',
+              position:'relative', zIndex:1,
+              animation:'aiPulse 2.5s ease-in-out infinite',
+            }}
+          />
+        </div>
+
+        {/* Animated rocket */}
         <motion.div
-          animate={launching ? { y: -900, scale: 0.1, opacity: 0 } : { y: [0, -10, 0] }}
+          animate={launching ? { y:-900, scale:0.1, opacity:0 } : { y:[0,-10,0] }}
           transition={launching
-            ? { duration: 2.0, ease: 'easeIn' }
-            : { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+            ? { duration:2.0, ease:'easeIn' }
+            : { duration:3, repeat:Infinity, ease:'easeInOut' }
           }
-          style={{ position: 'relative', width: 120, height: 160, margin: '0 auto 20px', cursor: 'pointer' }}
+          style={{ position:'relative', width:100, height:130, margin:'0 auto 14px', cursor:'pointer' }}
           onClick={() => !launching && handleLaunch('register')}
         >
-          <svg viewBox="0 0 100 160" width="120" height="160" style={{ filter: 'drop-shadow(0 0 22px #00d4ff)' }}>
+          <svg viewBox="0 0 100 160" width="100" height="130"
+            style={{ filter:'drop-shadow(0 0 22px #00d4ff)' }}>
             <defs>
               <linearGradient id="rg1" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#00d4ff"/>
@@ -63,49 +99,36 @@ export default function LaunchScreen() {
             <rect x="44" y="98" width="12" height="4" rx="2" fill="#00d4ff" opacity="0.4"/>
           </svg>
 
-          {/* Fire */}
           {launching && (
             <div className="animate-fire" style={{
-              position: 'absolute', bottom: -22, left: '50%',
-              transform: 'translateX(-50%)',
-              width: 32, height: 64,
-              background: 'linear-gradient(to bottom, #ff6b35, #ffd700, transparent)',
-              borderRadius: '0 0 60% 60%',
+              position:'absolute', bottom:-22, left:'50%',
+              transform:'translateX(-50%)',
+              width:32, height:64,
+              background:'linear-gradient(to bottom, #ff6b35, #ffd700, transparent)',
+              borderRadius:'0 0 60% 60%',
             }}/>
           )}
         </motion.div>
 
-        {/* Logo */}
+        {/* Brand name */}
         <div style={{
-          fontFamily: 'Orbitron, monospace', fontSize: 28, fontWeight: 900,
-          color: '#00d4ff', letterSpacing: 4, marginBottom: 6,
-          textShadow: '0 0 30px #00d4ff, 0 0 60px rgba(0,212,255,0.3)',
+          fontFamily:'Orbitron, monospace', fontSize:26, fontWeight:900,
+          color:'#00d4ff', letterSpacing:4, marginBottom:6,
+          textShadow:'0 0 30px #00d4ff, 0 0 60px rgba(0,212,255,0.35)',
         }}>🚀 ROCKET WALLET</div>
-        <div style={{ fontSize: 11, letterSpacing: 6, color: 'rgba(255,255,255,0.45)', marginBottom: 30, textTransform: 'uppercase' }}>
+        <div style={{ fontSize:11, letterSpacing:6, color:'rgba(255,255,255,0.45)', marginBottom:22, textTransform:'uppercase' }}>
           Your Crypto Universe
         </div>
-        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.38)', marginBottom: 28, lineHeight: 1.8, maxWidth: 260, margin: '0 auto 28px' }}>
+        <p style={{ fontSize:12, color:'rgba(255,255,255,0.4)', lineHeight:1.8, maxWidth:260, margin:'0 auto 26px' }}>
           Trade, transfer and explore the crypto cosmos from one galactic launchpad
         </p>
 
-        <button className="rw-btn-primary" onClick={() => handleLaunch('register')}>
+        <button className="rw-btn-primary" onClick={() => !launching && handleLaunch('register')}>
           CREATE ACCOUNT
         </button>
-        <button className="rw-btn-secondary" onClick={() => handleLaunch('login')}>
+        <button className="rw-btn-secondary" onClick={() => !launching && handleLaunch('login')}>
           ALREADY HAVE AN ACCOUNT
         </button>
-
-        {/* Orbit decorations */}
-        {[100, 160, 220].map((r, i) => (
-          <div key={r} style={{
-            position: 'absolute', top: '38%', left: '50%',
-            width: r * 2, height: r * 2,
-            borderRadius: '50%',
-            border: `1px solid rgba(0,212,255,${0.06 - i * 0.015})`,
-            transform: 'translate(-50%,-50%)',
-            pointerEvents: 'none',
-          }}/>
-        ))}
       </div>
     </div>
   );

@@ -1,11 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        orbitron: ['Orbitron', 'monospace'],
+        exo: ["'Exo 2'", 'sans-serif'],
+      },
+    },
   },
   plugins: [],
-}
+};
