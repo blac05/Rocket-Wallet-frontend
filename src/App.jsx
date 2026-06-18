@@ -12,6 +12,8 @@ import SendScreen from './components/screens/SendScreen';
 import ReceiveScreen from './components/screens/ReceiveScreen';
 import SwapScreen from './components/screens/SwapScreen';
 import MarketScreen from './components/screens/MarketScreen';
+import Navbar from "./components/ui/Navbar";
+import Glowinglogo from "./components/ui/Glowinglogo";
 import { FeedScreen, CommunityScreen, P2PScreen, AutopilotScreen } from './components/screens/OtherScreens';
 
 export default function App() {
@@ -19,25 +21,25 @@ export default function App() {
 
   const renderScreen = () => {
     switch (currentScreen) {
-      case 'launch':     return <LaunchScreen />;
-      case 'register':   return <AuthScreen mode="register" />;
-      case 'login':      return <AuthScreen mode="login" />;
-      case 'planet':     return <PlanetScreen />;
-      case 'dashboard':  return <DashboardScreen />;
-      case 'send':       return <SendScreen />;
-      case 'receive':    return <ReceiveScreen />;
-      case 'swap':       return <SwapScreen />;
-      case 'market':     return <MarketScreen />;
-      case 'feed':       return <FeedScreen />;
-      case 'community':  return <CommunityScreen />;
-      case 'p2p':        return <P2PScreen />;
-      case 'autopilot':  return <AutopilotScreen />;
-      default:           return <LaunchScreen />;
+      case 'launch':      return <LaunchScreen />;
+      case 'register':    return <AuthScreen mode="register" />;
+      case 'login':       return <AuthScreen mode="login" />;
+      case 'planet':      return <PlanetScreen />;
+      case 'dashboard':   return <DashboardScreen />;
+      case 'send':        return <SendScreen />;
+      case 'receive':     return <ReceiveScreen />;
+      case 'swap':        return <SwapScreen />;
+      case 'market':      return <MarketScreen />;
+      case 'feed':        return <FeedScreen />;
+      case 'community':   return <CommunityScreen />;
+      case 'p2p':         return <P2PScreen />;
+      case 'autopilot':   return <AutopilotScreen />;
+      default:            return <LaunchScreen />;
     }
   };
 
   return (
-    <div style={{ width:'100vw', height:'100vh', overflow:'hidden', position:'relative', background:'#030712' }}>
+    <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative', background: '#030712' }}>
       <Starfield />
       {renderScreen()}
       <BottomNav />

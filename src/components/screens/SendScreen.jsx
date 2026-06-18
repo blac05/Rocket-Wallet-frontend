@@ -6,7 +6,8 @@ const NETWORKS = ['BTC','ETH','BNB','SOL','USDT','TRC-20','ADA','XRP','MATIC','D
 const FEES = [
   { id:'priority', icon:'⚡', label:'PRIORITY', sub:'~30s', cost:'$4.20', color:'#ffd700' },
   { id:'basic',    icon:'🔵', label:'BASIC',    sub:'~5min',cost:'$1.05', color:'#00d4ff' },
-  { id:'free',     icon:'🌱', label:'FREE',     sub:'~1hr', cost:'Free',  color:'#00ff88' },
+  { id: 'free', icon: '🌱', label: 'FREE', sub: '~1hr', cost: 'Free', color: '#00ff88' },
+  { id: 'slow', icon: '🐢', label: 'SLOW', sub: '~3hr', cost: '$0.10', color: '#ff4466' },
 ];
 
 export default function SendScreen() {

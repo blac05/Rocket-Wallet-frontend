@@ -1,5 +1,5 @@
-import logo from '../assets/logo.png';
-import useWalletStore from '../store/useWalletStore';
+import logo from "../../assets/logo.png";
+import useWalletStore from '../../store/useWalletStore';
 
 export default function Navbar() {
   const setScreen = useWalletStore((s) => s.setScreen);

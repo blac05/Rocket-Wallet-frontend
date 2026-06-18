@@ -12,6 +12,16 @@
   --purple: #9b59ff;
   --orange: #ff6b35;
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  background: #020617;
+  color: white;
+  font-family: Inter, sans-serif;
+}
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
